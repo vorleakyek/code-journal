@@ -10,10 +10,18 @@ button.addEventListener('click', submitForm);
 
 function photoPreview(event) {
   const inputUrl = event.target.value;
-  imgPreview.src = inputUrl;
+  if (photoUrl.checkValidity()) {
+    imgPreview.src = inputUrl;
+  } else {
+    imgPreview.src = 'images/placeholder-image-square.jpg';
+  }
 }
 
 function submitForm(event) {
+  if (!title.checkValidity() || !photoUrl.checkValidity() || !notes.checkValidity()) {
+    return;
+  }
+
   event.preventDefault();
   const dataObj = {
     title: title.value,
