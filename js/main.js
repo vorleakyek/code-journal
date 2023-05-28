@@ -75,9 +75,3 @@ function loadAllEntries(event) {
     renderEntry(data.entries[i]);
   }
 }
-
-// function toggleNoEntries() {
-//   const noData = document.querySelector('.no-data');
-//   noData.classList.toggle('hidden');
-
-// }
