@@ -19,16 +19,21 @@
   <header>
     <div class="container row">
       <div class="column-full column-half">
-        <h1 class="header-title">Code Journal</h1>
+        <nav>
+          <ul class="row vertical-aligned">
+            <li class="header-title">Code Journal</li>
+            <li class="enties-link"><a href="#entry-page">Entries</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form">
+    <div id="entry-from" data-view="entry-form" class="hidden">
       <form id="form">
         <div class="row">
           <div class="column-full">
-            <h2 class="form-header">New Entry</h2>
+            <h1 class="form-header">New Entry</h1>
           </div>
         </div>
         <div class="row">
@@ -55,7 +60,15 @@
         </div>
       </form>
     </div>
-    <div data-view="entries" class="hidden"></div>
+    <div id="entry-page" data-view="entries">
+      <div class="row entry-header">
+        <div class="column-full flex">
+          <h1>Entries</h1>
+          <a href="#entry-form" id="btn-new-entry" class="btn-link">New</a>
+        </div>
+      </div>
+      <ul class="list-entries"></ul>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

@@ -28,6 +28,10 @@ textarea {
   margin-bottom: 25px;
 }
 
+ul {
+  padding: 0;
+}
+
 input {
   height: 45px;
 }
@@ -43,6 +47,26 @@ button {
   cursor: pointer;
 }
 
+nav a {
+  color: white;
+  font-size: 20px;
+  padding-left: 20px;
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+.vertical-aligned {
+  align-items: baseline;
+}
+
 .form-button {
   text-align: right;
 }
@@ -56,8 +80,39 @@ button {
   font-size: 24px;
 }
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-link {
+  padding: 5px 15px;
+  border-radius: 3px;
+  background-color: #562b81;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  margin: 20px 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pre-wrap {
+  white-space: pre-wrap;
+}
+
+.no-margin {
+  margin: 0;
+}
+
 input:focus,
 textarea:focus {
   outline: 2px solid #562b81;
   border: none;
+}
+
+div.entry-header h1 {
+  display: inline;
+  margin: 0;
 }
