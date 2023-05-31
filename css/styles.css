@@ -28,6 +28,10 @@ textarea {
   margin-bottom: 25px;
 }
 
+ul {
+  padding: 0;
+}
+
 input {
   height: 45px;
 }
@@ -43,8 +47,24 @@ button {
   cursor: pointer;
 }
 
+nav a {
+  color: white;
+  font-size: 20px;
+  padding-left: 20px;
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
 .center {
   text-align: center;
+}
+
+.vertical-aligned {
+  align-items: baseline;
 }
 
 .form-button {
@@ -66,12 +86,24 @@ button {
   align-items: center;
 }
 
-#btn-new-entry {
+.btn-link {
+  padding: 5px 15px;
+  border-radius: 3px;
+  background-color: #562b81;
+  color: white;
+  text-transform: uppercase;
+  border: none;
   margin: 20px 0;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.list-entries {
-  padding: 0;
+.pre-wrap {
+  white-space: pre-wrap;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 input:focus,
@@ -80,18 +112,7 @@ textarea:focus {
   border: none;
 }
 
-h1.header-title a {
-  color: white;
-  font-size: 18px;
-  padding-left: 10px;
-  text-decoration: none;
-}
-
-div.entry-header h2 {
+div.entry-header h1 {
   display: inline;
   margin: 0;
-}
-
-.list-entries li {
-  list-style-type: none;
 }
