@@ -7,8 +7,6 @@ let data = {
   nextEntryId: 1
 };
 
-// localStorage.clear();
-
 const previousData = localStorage.getItem('code journal');
 
 window.addEventListener('beforeunload', function (event) {
