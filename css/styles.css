@@ -56,7 +56,6 @@ nav a {
 
 ul li {
   list-style-type: none;
-  margin-bottom: 20px;
 }
 
 .center {
@@ -106,6 +105,10 @@ ul li {
   margin: 0;
 }
 
+.edit-icon {
+  color: #562b81;
+}
+
 input:focus,
 textarea:focus {
   outline: 2px solid #562b81;
@@ -115,4 +118,8 @@ textarea:focus {
 div.entry-header h1 {
   display: inline;
   margin: 0;
+}
+
+ul.list-entries li {
+  margin-bottom: 20px;
 }
