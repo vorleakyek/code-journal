@@ -131,6 +131,10 @@ function submitForm(event) {
     data.nextEntryId++;
     data.entries.push(dataObj);
     ul.prepend(renderEntry(dataObj));
+
+    if (data.entries.length === 1) {
+      toggleNoEntries();
+    }
   } else {
     const dataObjedit = {
       title: title.value,
@@ -138,22 +142,25 @@ function submitForm(event) {
       notes: notes.value,
       entryId: data.editing.entryId
     };
-    data.entries.splice(data.editing.entryId - 1, 1, dataObjedit);
+
+    const findItem = data.entries.find(obj => obj.entryId === data.editing.entryId);
+    const findItemIndex = data.entries.indexOf(findItem);
+    data.entries.splice(findItemIndex, 1, dataObjedit);
     const replacedLi = document.querySelector(`[data-entry-id = "${data.editing.entryId}"]`);
     replacedLi.replaceWith(renderEntry(dataObjedit));
     formHeader.textContent = 'New Entry';
     data.editing = null;
     divFormButton.classList = 'form-button column-full';
     deleteButton.classList = 'link hidden';
+
+    if (data.entries.length === 0) {
+      toggleNoEntries();
+    }
   }
 
   imgPreview.src = 'images/placeholder-image-square.jpg';
   form.reset();
   viewSwap('entries');
-
-  if (data.entries.length === 1) {
-    toggleNoEntries();
-  }
 }
 
 function renderEntry(entry) {
@@ -190,27 +197,25 @@ function renderEntry(entry) {
 }
 
 function loadAllEntries(event) {
-  if (data.entries.length === 0) {
-    const newLi = document.createElement('li');
-    ul.append(newLi);
-    const newPara = document.createElement('p');
-    newPara.className = 'center no-data';
-    newPara.textContent = 'No entries have been recorded.';
-    newLi.append(newPara);
-  }
-
   for (let i = 0; i < data.entries.length; i++) {
     renderEntry(data.entries[i]);
   }
 
   viewSwap(data.view);
 
-  if (data.entries === 0) {
+  if (data.entries.length === 0) {
     toggleNoEntries();
   }
 }
 
 function toggleNoEntries() {
+  const newLi = document.createElement('li');
+  ul.append(newLi);
+  const newPara = document.createElement('p');
+  newPara.className = 'center no-data hidden';
+  newPara.textContent = 'No entries have been recorded.';
+  newLi.append(newPara);
+
   const noData = document.querySelector('.no-data');
   noData.classList.toggle('hidden');
 }
