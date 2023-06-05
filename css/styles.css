@@ -2,6 +2,7 @@ body {
   background-color: #f0f0f0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
+  position: relative;
 }
 
 img {
@@ -39,11 +40,6 @@ input {
 button {
   padding: 5px 15px;
   border-radius: 3px;
-  background-color: #562b81;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  margin-bottom: 25px;
   cursor: pointer;
 }
 
@@ -56,6 +52,10 @@ nav a {
 
 ul li {
   list-style-type: none;
+}
+
+.container {
+  position: relative;
 }
 
 .center {
@@ -85,6 +85,14 @@ ul li {
   align-items: center;
 }
 
+.btn-1 {
+  background-color: #562b81;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  margin-bottom: 25px;
+}
+
 .btn-link {
   padding: 5px 15px;
   border-radius: 3px;
@@ -107,6 +115,60 @@ ul li {
 
 .edit-icon {
   color: #562b81;
+  cursor: pointer;
+}
+
+.link {
+  color: red;
+  text-decoration: underline;
+  border: none;
+  padding: 5px 0;
+  margin-bottom: 25px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  border: none;
+  z-index: 2;
+}
+
+.confirm-popup {
+  font-weight: bold;
+}
+
+.cancel-btn {
+  background-color: #b6b6b6;
+  text-transform: uppercase;
+  border: none;
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.confirm-btn {
+  background-color: #dc2626;
+  text-transform: uppercase;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.overlay {
+  background-color: rgb(0 0 0/50%);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
 }
 
 input:focus,

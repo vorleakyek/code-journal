@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="overlay hidden"></div>
   <header>
     <div class="container row">
       <div class="column-full column-half">
@@ -28,8 +29,9 @@
       </div>
     </div>
   </header>
+
   <main class="container">
-    <div id="entry-from" data-view="entry-form" class="hidden">
+    <div id="entry-form" data-view="entry-form" class="hidden">
       <form id="form">
         <div class="row">
           <div class="column-full">
@@ -55,7 +57,8 @@
         </div>
         <div class="row">
           <div class="form-button column-full">
-            <button id="btn" type="submit">Save</button>
+            <button id="delete-btn" class="link hidden">Delete Entry</button>
+            <button id="btn" class="btn-1" type="submit">Save</button>
           </div>
         </div>
       </form>
@@ -70,6 +73,7 @@
       <ul class="list-entries"></ul>
     </div>
   </main>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

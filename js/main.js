@@ -10,6 +10,8 @@ const newButton = document.querySelector('#btn-new-entry');
 const entryForm = document.querySelector('[data-view="entry-form"]');
 const entryPage = document.querySelector('[data-view="entries"]');
 const formHeader = document.querySelector('.form-header');
+const divFormButton = document.querySelector('.form-button');
+const deleteButton = document.querySelector('#delete-btn');
 
 photoUrl.addEventListener('input', photoPreview);
 button.addEventListener('click', submitForm);
@@ -17,6 +19,64 @@ entriesLink.addEventListener('click', function (event) { viewSwap('entries'); })
 newButton.addEventListener('click', newButtonClick);
 document.addEventListener('DOMContentLoaded', loadAllEntries);
 ul.addEventListener('click', edit);
+deleteButton.addEventListener('click', handleModal);
+
+function handleModal(event) {
+  const body = document.querySelector('body');
+  const divOverlay = document.createElement('div');
+  divOverlay.className = 'overlay';
+  body.prepend(divOverlay);
+  const div1 = document.createElement('div');
+  div1.className = 'modal';
+  body.append(div1);
+  const div2 = document.createElement('div');
+  div2.className = 'col-modal';
+  div1.append(div2);
+  const p = document.createElement('p');
+  p.className = 'confirm-popup';
+  p.textContent = 'Are you sure you want to delete this entry?';
+  div2.append(p);
+  const div3 = document.createElement('div');
+  div3.className = 'flex';
+  div2.append(div3);
+  const btnCancel = document.createElement('button');
+  btnCancel.className = 'cancel-btn';
+  btnCancel.textContent = 'Cancel';
+  div3.append(btnCancel);
+  const btnConfirm = document.createElement('button');
+  btnConfirm.textContent = 'Confirm';
+  btnConfirm.className = 'confirm-btn';
+  div3.append(btnConfirm);
+
+  btnCancel.addEventListener('click', closeModal);
+  btnConfirm.addEventListener('click', handleConfirm);
+}
+
+function handleConfirm(event) {
+  removeItem(event);
+  data.editing = null;
+
+  viewSwap('entries');
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+}
+
+function removeItem(event) {
+  const item = data.entries.find(obj => obj.entryId === data.editing.entryId);
+  const indexItem = data.entries.indexOf(item);
+  data.entries.splice(indexItem, 1);
+  const removeLi = document.querySelector(`[data-entry-id="${data.editing.entryId}"]`);
+  removeLi.remove();
+  closeModal(event);
+}
+
+function closeModal(event) {
+  const modal = document.querySelector('.modal');
+  modal.remove();
+  const divOverlay = document.querySelector('.overlay');
+  divOverlay.remove();
+}
 
 function newButtonClick(event) {
   form.reset();
@@ -41,6 +101,8 @@ function edit(event) {
   notes.value = matchObj.notes;
   imgPreview.setAttribute('src', photoUrl.value);
   formHeader.textContent = 'Edit Entry';
+  divFormButton.classList = 'form-button column-full flex';
+  deleteButton.classList = 'link';
 }
 
 function photoPreview(event) {
@@ -81,6 +143,8 @@ function submitForm(event) {
     replacedLi.replaceWith(renderEntry(dataObjedit));
     formHeader.textContent = 'New Entry';
     data.editing = null;
+    divFormButton.classList = 'form-button column-full';
+    deleteButton.classList = 'link hidden';
   }
 
   imgPreview.src = 'images/placeholder-image-square.jpg';
@@ -156,6 +220,8 @@ function viewSwap(dataView) {
     entryForm.classList.remove('hidden');
     entryPage.setAttribute('class', 'hidden');
     data.view = dataView;
+    divFormButton.classList = 'form-button column-full';
+    deleteButton.classList = 'link hidden';
 
     if (data.editing !== null) {
       title.value = data.editing.title;
@@ -163,6 +229,8 @@ function viewSwap(dataView) {
       notes.value = data.editing.notes;
       imgPreview.setAttribute('src', data.editing.imgUrl);
       formHeader.textContent = 'Edit Entry';
+      divFormButton.classList = 'form-button column-full flex';
+      deleteButton.classList = 'link';
     }
 
   } else if (dataView === 'entries') {
