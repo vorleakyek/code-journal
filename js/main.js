@@ -21,90 +21,6 @@ document.addEventListener('DOMContentLoaded', loadAllEntries);
 ul.addEventListener('click', edit);
 deleteButton.addEventListener('click', handleModal);
 
-function handleModal(event) {
-  const body = document.querySelector('body');
-  const divOverlay = document.createElement('div');
-  divOverlay.className = 'overlay';
-  body.prepend(divOverlay);
-  const div1 = document.createElement('div');
-  div1.className = 'modal';
-  body.append(div1);
-  const div2 = document.createElement('div');
-  div2.className = 'col-modal';
-  div1.append(div2);
-  const p = document.createElement('p');
-  p.className = 'confirm-popup';
-  p.textContent = 'Are you sure you want to delete this entry?';
-  div2.append(p);
-  const div3 = document.createElement('div');
-  div3.className = 'flex';
-  div2.append(div3);
-  const btnCancel = document.createElement('button');
-  btnCancel.className = 'cancel-btn';
-  btnCancel.textContent = 'Cancel';
-  div3.append(btnCancel);
-  const btnConfirm = document.createElement('button');
-  btnConfirm.textContent = 'Confirm';
-  btnConfirm.className = 'confirm-btn';
-  div3.append(btnConfirm);
-
-  btnCancel.addEventListener('click', closeModal);
-  btnConfirm.addEventListener('click', handleConfirm);
-}
-
-function handleConfirm(event) {
-  removeItem(event);
-  data.editing = null;
-
-  viewSwap('entries');
-  if (data.entries.length === 0) {
-    toggleNoEntries();
-  }
-}
-
-function removeItem(event) {
-  const item = data.entries.find(obj => obj.entryId === data.editing.entryId);
-  const indexItem = data.entries.indexOf(item);
-  data.entries.splice(indexItem, 1);
-  const removeLi = document.querySelector(`[data-entry-id="${data.editing.entryId}"]`);
-  removeLi.remove();
-  closeModal(event);
-}
-
-function closeModal(event) {
-  const modal = document.querySelector('.modal');
-  modal.remove();
-  const divOverlay = document.querySelector('.overlay');
-  divOverlay.remove();
-}
-
-function newButtonClick(event) {
-  form.reset();
-  formHeader.textContent = 'New Entry';
-  imgPreview.src = 'images/placeholder-image-square.jpg';
-  data.editing = null;
-  viewSwap('entry-form');
-}
-
-function edit(event) {
-  if (event.target.tagName !== 'I') {
-    return;
-  }
-  viewSwap('entry-form');
-  const closestLi = event.target.closest('[data-entry-id]');
-  const closestLiValue = parseInt(closestLi.getAttribute('data-entry-id'));
-  const matchObj = data.entries.find(obj => obj.entryId === closestLiValue);
-
-  data.editing = matchObj;
-  title.value = matchObj.title;
-  photoUrl.value = matchObj.imgUrl;
-  notes.value = matchObj.notes;
-  imgPreview.setAttribute('src', photoUrl.value);
-  formHeader.textContent = 'Edit Entry';
-  divFormButton.classList = 'form-button column-full flex';
-  deleteButton.classList = 'link';
-}
-
 function photoPreview(event) {
   const inputUrl = event.target.value;
   if (photoUrl.checkValidity()) {
@@ -163,6 +79,105 @@ function submitForm(event) {
   viewSwap('entries');
 }
 
+function newButtonClick(event) {
+  form.reset();
+  formHeader.textContent = 'New Entry';
+  imgPreview.src = 'images/placeholder-image-square.jpg';
+  data.editing = null;
+  viewSwap('entry-form');
+}
+
+function loadAllEntries(event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    renderEntry(data.entries[i]);
+  }
+
+  viewSwap(data.view);
+
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+}
+
+function edit(event) {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+  viewSwap('entry-form');
+  const closestLi = event.target.closest('[data-entry-id]');
+  const closestLiValue = parseInt(closestLi.getAttribute('data-entry-id'));
+  const matchObj = data.entries.find(obj => obj.entryId === closestLiValue);
+
+  data.editing = matchObj;
+  title.value = matchObj.title;
+  photoUrl.value = matchObj.imgUrl;
+  notes.value = matchObj.notes;
+  imgPreview.setAttribute('src', photoUrl.value);
+  formHeader.textContent = 'Edit Entry';
+  divFormButton.classList = 'form-button column-full flex';
+  deleteButton.classList = 'link';
+}
+
+function handleModal(event) {
+  event.preventDefault();
+  const body = document.querySelector('body');
+  const divOverlay = document.createElement('div');
+  divOverlay.className = 'overlay';
+  body.prepend(divOverlay);
+  const div1 = document.createElement('div');
+  div1.className = 'modal';
+  body.append(div1);
+  const div2 = document.createElement('div');
+  div2.className = 'col-modal';
+  div1.append(div2);
+  const p = document.createElement('p');
+  p.className = 'confirm-popup';
+  p.textContent = 'Are you sure you want to delete this entry?';
+  div2.append(p);
+  const div3 = document.createElement('div');
+  div3.className = 'flex';
+  div2.append(div3);
+  const btnCancel = document.createElement('button');
+  btnCancel.className = 'cancel-btn';
+  btnCancel.textContent = 'Cancel';
+  div3.append(btnCancel);
+  const btnConfirm = document.createElement('button');
+  btnConfirm.textContent = 'Confirm';
+  btnConfirm.className = 'confirm-btn';
+  div3.append(btnConfirm);
+
+  btnCancel.addEventListener('click', closeModal);
+  btnConfirm.addEventListener('click', handleConfirm);
+}
+
+function handleConfirm(event) {
+  event.preventDefault();
+  removeItem(event);
+  data.editing = null;
+
+  viewSwap('entries');
+  if (data.entries.length === 0) {
+    toggleNoEntries();
+  }
+}
+
+function removeItem(event) {
+  const item = data.entries.find(obj => obj.entryId === data.editing.entryId);
+  const indexItem = data.entries.indexOf(item);
+  data.entries.splice(indexItem, 1);
+  const removeLi = document.querySelector(`[data-entry-id="${data.editing.entryId}"]`);
+  removeLi.remove();
+  closeModal(event);
+}
+
+function closeModal(event) {
+  event.preventDefault();
+  const modal = document.querySelector('.modal');
+  modal.remove();
+  const divOverlay = document.querySelector('.overlay');
+  divOverlay.remove();
+}
+
 function renderEntry(entry) {
   const newLi = document.createElement('li');
   newLi.setAttribute('data-entry-id', entry.entryId);
@@ -194,18 +209,6 @@ function renderEntry(entry) {
   newpara.classList.add('pre-wrap');
   newDiv3.append(newpara);
   return newLi;
-}
-
-function loadAllEntries(event) {
-  for (let i = 0; i < data.entries.length; i++) {
-    renderEntry(data.entries[i]);
-  }
-
-  viewSwap(data.view);
-
-  if (data.entries.length === 0) {
-    toggleNoEntries();
-  }
 }
 
 function toggleNoEntries() {

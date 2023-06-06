@@ -126,6 +126,7 @@ ul li {
   margin-bottom: 25px;
   cursor: pointer;
   text-align: left;
+  font-size: 14px;
 }
 
 .modal {
@@ -142,25 +143,25 @@ ul li {
 
 .confirm-popup {
   font-weight: bold;
+  white-space: nowrap;
+}
+
+.cancel-btn,
+.confirm-btn {
+  border: none;
+  padding: 8px 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .cancel-btn {
   background-color: #b6b6b6;
-  text-transform: uppercase;
-  border: none;
-  padding: 8px 10px;
-  margin-top: 10px;
-  font-weight: bold;
 }
 
 .confirm-btn {
   background-color: #dc2626;
-  text-transform: uppercase;
   color: white;
-  border: none;
-  padding: 8px 10px;
-  margin-top: 10px;
-  font-weight: bold;
 }
 
 .overlay {
