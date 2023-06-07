@@ -114,7 +114,7 @@ function edit(event) {
   notes.value = matchObj.notes;
   imgPreview.setAttribute('src', photoUrl.value);
   formHeader.textContent = 'Edit Entry';
-  divFormButton.classList = 'form-button column-full flex';
+  divFormButton.classList = 'form-button column-full flex reverse';
   deleteButton.classList = 'link';
 }
 
@@ -237,7 +237,7 @@ function viewSwap(dataView) {
       notes.value = data.editing.notes;
       imgPreview.setAttribute('src', data.editing.imgUrl);
       formHeader.textContent = 'Edit Entry';
-      divFormButton.classList = 'form-button column-full flex';
+      divFormButton.classList = 'form-button column-full flex reverse';
       deleteButton.classList = 'link';
     }
 

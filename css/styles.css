@@ -85,6 +85,10 @@ ul li {
   align-items: center;
 }
 
+.reverse {
+  flex-direction: row-reverse;
+}
+
 .btn-1 {
   background-color: #562b81;
   color: white;
